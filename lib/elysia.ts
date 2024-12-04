@@ -17,5 +17,6 @@ export function onError({ error, set }: {
 
 	// All non-custom errors are treated as 500 Internal Server Error and message is obscured
 	set.status = HttpResponse.InternalServerError.code;
+
 	return formatErrorMessage(HttpResponse.InternalServerError.name, HttpResponse.InternalServerError.description);
 }

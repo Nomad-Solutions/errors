@@ -17,7 +17,7 @@
     "consola": "^3.2.3"
   },
   "devDependencies": {
-    "@nomad-solutions/dev-env": "github:Nomad-Solutions/dev-env#v2.0.0"
+    "@nomad-solutions/dev-env": "github:Nomad-Solutions/dev-env#v2.4.0"
   },
   "trustedDependencies": [
     "@nomad-solutions/dev-env",

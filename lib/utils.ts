@@ -53,6 +53,7 @@ function logError(error: unknown, withDate = true) {
 	} else {
 		if (withDate) {
 			consola.error(error);
+
 			return;
 		}
 	}
@@ -61,6 +62,7 @@ function logError(error: unknown, withDate = true) {
 function logHttpError(error: HttpError, withDate = true) {
 	if (withDate) {
 		consola.error(error.name, colorize('bold', error.statusCode) + ':', error );
+
 		return;
 	}
 
@@ -70,6 +72,7 @@ function logHttpError(error: HttpError, withDate = true) {
 function logBuiltinError(error: Error, withDate = true) {
 	if (withDate) {
 		consola.error(error.name + ':', error);
+
 		return;
 	}
 	
