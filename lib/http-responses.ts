@@ -1,3 +1,5 @@
+import type { StatusMap } from 'elysia';
+
 export const HttpResponse = {
 	Continue: {
 		code: 100,
@@ -11,7 +13,7 @@ export const HttpResponse = {
 	},
 	EarlyHints: {
 		code: 103,
-		name: 'Early hints',
+		name: 'Early Hints',
 		description: 'The request has returned hints about relevant resources.'
 	},
 	Ok: {
@@ -111,17 +113,17 @@ export const HttpResponse = {
 	},
 	Precondition: {
 		code: 412,
-		name: 'Precondition',
-		description: ' Failed. The precondition given in the request evaluated to false by the server.'
+		name: 'Precondition Failed',
+		description: 'The precondition given in the request evaluated to false by the server.'
 	},
 	RequestEntityTooLarge: {
 		code: 413,
-		name: 'Request Entity Too Large',
+		name: 'Payload Too Large',
 		description: 'The server will not accept the request.'
 	},
 	RequestUriTooLong: {
 		code: 414,
-		name: 'Request-URI Too Long',
+		name: 'URI Too Long',
 		description: 'The server will not accept the request.'
 	},
 	UnsupportedMediaType: {
@@ -131,7 +133,7 @@ export const HttpResponse = {
 	},
 	RequestedRangeNotSatisfiable: {
 		code: 416,
-		name: 'Requested Range Not Satisfiable',
+		name: 'Range Not Satisfiable',
 		description: 'The client has asked for a portion of the file.'
 	},
 	ExpectationFailed: {
@@ -172,10 +174,20 @@ export const HttpResponse = {
 	NetworkAuthenticationRequired: {
 		code: 511,
 		name: 'Network Authentication Required',
-		description: 'The client needs to authenticate.'
+		description: 'The client needs to authenticate.',
 	}
 } as const;
 
 export type HttpResponse = (typeof HttpResponse)[keyof typeof HttpResponse]
 
 export type HttpCode = (typeof HttpResponse)[keyof typeof HttpResponse]['code']
+
+type MappedElysiaStatusMap = Record<string, {
+	code: StatusMap[keyof StatusMap],
+	name: keyof StatusMap,
+	description: string
+}>;
+
+HttpResponse satisfies MappedElysiaStatusMap;
+//*							/\
+//* this will light up if HttpResponse has a code / name that is not also in Elysia's StatusMap, which is used for setting status codes in Elysia
