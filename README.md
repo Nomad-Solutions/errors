@@ -35,3 +35,17 @@ You can use the `isHttpError` and `isError` type guards to manage error types.
 
 ## Logging Errors
 You can use `logTraceableError` in Elysia's error handler to log any error in a pretty way (including the whole stack trace).
+
+## Development
+
+### Developing with other application
+When developing on this package, it might be beneficial to see how changes interact with your source code in your application. To do this, you can use [bun link](https://bun.sh/docs/cli/link).
+
+**TLDR**:
+1. Execute `bun link` from the root of this repository.
+2. Execute `bun link @nomad-solutions/errors` in the root of your application.
+
+This package should now be usable in your application (see [Usage section](#usage)), and updates to this package will be reflected instantly in your application (by the magic of symlinks).
+
+> [!IMPORTANT]  
+> This will not add the dependency to your `package.json`, so you will need to [install](#install) this package manually if you wish to do use it.
