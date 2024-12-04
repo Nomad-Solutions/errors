@@ -9,6 +9,19 @@ Using this package means following 4 simple rules:
 3. When you need to handle errors, you should pass them around as values (use `catchError` as needed). `undefined` or `null` will also be useful in many cases. This ensures better type safety.
 4. When creating a new error, always wrap any original error.
 
+## Install
+Add this repository as a dependency in your `package.json`:
+
+```json
+// package.json
+{
+	"dependencies": {
+		"@nomad-solutions/errors": "github:Nomad-Solutions/errors#v1.0.0", // specific tag (recommended)
+		"@nomad-solutions/errors": "github:Nomad-Solutions/errors" // latest commit
+	}
+}
+```
+
 ## Usage
 
 ### Elysia setup
