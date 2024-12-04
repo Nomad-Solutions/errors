@@ -13,10 +13,6 @@ export abstract class HttpError extends Error {
 	constructor(message?: string, originalError?: unknown) {
 		super(message, { cause: originalError });
 	}
-
-	inspect() {
-		return 'lol';
-	}
 }
 
 export class NotFoundError extends HttpError {
@@ -24,4 +20,28 @@ export class NotFoundError extends HttpError {
 	statusCode = HttpResponse.NotFound.code;
 	httpName = HttpResponse.NotFound.name;
 	httpDescription = HttpResponse.NotFound.description;
+}
+
+export class AuthorizationError extends HttpError {
+	name = 'AuthorizationError' as const;
+	statusCode = HttpResponse.Forbidden.code;
+	httpName = HttpResponse.Forbidden.name;
+	httpDescription = HttpResponse.Forbidden.description;
+}
+
+export class AuthenticationError extends HttpError {
+	name = 'AuthenticationError' as const;
+	statusCode = HttpResponse.Unauthorized.code;
+	httpName = HttpResponse.Unauthorized.name;
+	httpDescription = HttpResponse.Unauthorized.description;
+}
+
+export abstract class InitializationError extends Error {}
+
+export class MissingEnvironmentVariableError extends InitializationError {
+	name = 'MissingEnvironmentVariableError' as const;
+
+	constructor(public readonly envVar: Uppercase<string>, public readonly effect?: string) {
+		super(`Missing environment variable: ${envVar} - ${effect}`);
+	}
 }
