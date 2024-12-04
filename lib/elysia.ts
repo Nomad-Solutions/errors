@@ -1,11 +1,12 @@
 import { isHttpError } from './assertions';
 import { HttpResponse } from './http-responses';
 import { formatErrorMessage, logTraceableError } from './utils';
+import type { Context } from 'elysia';
 
 // This can be passed directly to Elysia.onError
 export function onError({ error, set }: {
 	error: unknown,
-	set: { status: number }
+	set: Context['set']
 }) {
 	logTraceableError(error);
 
