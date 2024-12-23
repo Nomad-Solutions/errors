@@ -60,5 +60,6 @@ When developing on this package, it might be beneficial to see how changes inter
 
 This package should now be usable in your application (see [Usage section](#usage)), and updates to this package will be reflected instantly in your application (by the magic of symlinks).
 
+<!-- eslint-disable-next-line markdown/no-missing-label-refs -- not a ref -->
 > [!IMPORTANT]  
 > This will not add the dependency to your `package.json`, so you will need to [install](#install) this package manually if you wish to do use it.

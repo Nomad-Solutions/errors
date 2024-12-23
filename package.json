@@ -5,6 +5,8 @@
   "scripts": {
     "prepare": "husky",
     "lint-staged": "lint-staged",
+    "lint:es": "eslint '**/*.{ts,js,mjs,cjs,json,jsonc,json5,md,vue,html,svg,css,postcss,pcss}'",
+    "lint:fix:es": "eslint '**/*.{ts,js,mjs,cjs,json,jsonc,json5,md,vue,html,svg,css,postcss,pcss}' --fix",
     "version": "commit-and-tag-version"
   },
   "exports": {
@@ -14,16 +16,19 @@
   "main": "./index.ts",
   "module": "./index.ts",
   "dependencies": {
-    "consola": "^3.2.3"
+    "consola": "^3.2.3",
+    "@nomad-solutions/ts-utils": "github:Nomad-Solutions/ts-utils#v1.1.0"
   },
   "devDependencies": {
-    "@nomad-solutions/dev-env": "github:Nomad-Solutions/dev-env#v2.4.0"
+    "@nomad-solutions/dev-env": "github:Nomad-Solutions/dev-env#v3.0.0-7"
   },
   "peerDependencies": {
     "elysia": "^1.1.26"
   },
   "trustedDependencies": [
     "@nomad-solutions/dev-env",
+    "@nomad-solutions/ts-utils",
+    "esbuild",
     "husky"
   ]
 }
