@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.0.0](https://github.com/Nomad-Solutions/errors/compare/v1.2.0...v2.0.0) (2024-12-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* return type might be unknown now
+
+### Bug Fixes
+
+* change catchError to return unknown errors as unknown, not Error ([941250b](https://github.com/Nomad-Solutions/errors/commit/941250bd17e12b6e41bec3b9a6d54ae467f665db))
+
 ## [1.2.0](https://github.com/Nomad-Solutions/errors/compare/v1.1.0...v1.2.0) (2024-12-04)
 
 
