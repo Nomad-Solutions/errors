@@ -1,3 +1,14 @@
 {
-	"extends": "@nomad-solutions/dev-env/tsconfig/tsconfig",
+	"extends": "@nomad-solutions/dev-env/tsconfig/base",
+	"compilerOptions": {
+		"outDir": "dist",
+		"paths": {
+      "@": [
+        "./"
+      ],
+      "@/*": [
+        "./*"
+			]
+		}
+	}
 }
