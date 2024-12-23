@@ -1,7 +1,12 @@
 import { consola, createConsola } from 'consola';
 import { colorize } from 'consola/utils';
-import { HttpError } from './errors';
-import { isError, isHttpError } from './assertions';
+import type { HttpError } from './errors';
+import {
+	isError,
+	isErrorOfType,
+	isHttpError
+} from './assertions';
+import type { NonEmptyArray, ArrayElement } from '@nomad-solutions/ts-utils';
 
 const consolaNoDate = createConsola({
 	level: 0,
@@ -10,21 +15,30 @@ const consolaNoDate = createConsola({
 	},
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function catchError<T, E extends new (...args: any[]) => Error>(promise: Promise<T>, errorsToCatch?: E[]): Promise<[T, undefined] | [undefined, InstanceType<E>]> {
-	return promise.then((data): [T, undefined] => {
-		return [ data, undefined ];
-	}).catch((error): [undefined, InstanceType<E>] => {
-		if (!errorsToCatch?.length) {
-			return [ undefined, error ];
-		}
-		
-		if (errorsToCatch.some(e => error instanceof e)) {
-			return [ undefined, error ];
-		}
+// TODO: see if catchError can be typed better with function overloading, since return type is dependent in whether errorsToCatch is passed or not
 
-		throw error;
-	});
+/* 
+In any case, calling this will return tuple with data as first element (if no error is thrown).
+Calling this with only first argument will return [data, undefined] if no error is thrown or [undefined, unknown error] if error is thrown.
+Calling this with two args will return [data, undefined] if no error is thrown or [undefined, errortype] if error is thrown and it is of a type included in the second argument.
+Calling this with two args will throw error if error is thrown and it is not of a type included in the second argument.
+*/
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function catchError<T, E extends NonEmptyArray<new (...args: any[]) => Error> | undefined>(promise: Promise<T>, errorsToCatch?: E): Promise<[T, undefined] | [undefined, E extends undefined ? unknown : InstanceType<ArrayElement<E>>]> {
+	return promise.then((data): [T, undefined] =>
+		[ data, undefined ])
+		// eslint-disable-next-line @typescript-eslint/use-unknown-in-catch-callback-variable -- returntype is hard to type with .some etc, but at least the inputs and outputs match
+		.catch((error) => {
+			if (!errorsToCatch) {
+				return [ undefined, error ];
+			}
+		
+			if (errorsToCatch.some(e => isErrorOfType(error, e))) {
+				return [ undefined, error ];
+			}
+
+			throw error;
+		});
 }
 
 export function formatErrorMessage(name: string, desc: string) {
