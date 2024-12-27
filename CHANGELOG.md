@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.1.0](https://github.com/Nomad-Solutions/errors/compare/v2.0.0...v2.1.0) (2024-12-27)
+
+
+### Features
+
+* added Conflict- and BadRequestError ([7029c92](https://github.com/Nomad-Solutions/errors/commit/7029c927d33daeb23fd0af811f17b272c7763c32))
+
 ## [2.0.0](https://github.com/Nomad-Solutions/errors/compare/v1.2.0...v2.0.0) (2024-12-23)
 
 
