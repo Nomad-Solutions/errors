@@ -22,6 +22,20 @@ export class NotFoundError extends HttpError {
 	httpDescription = HttpResponse.NotFound.description;
 }
 
+export class ConflictError extends HttpError {
+	name = 'ConflictError' as const;
+	statusCode = HttpResponse.Conflict.code;
+	httpName = HttpResponse.Conflict.name;
+	httpDescription = HttpResponse.Conflict.description;
+}
+
+export class BadRequestError extends HttpError {
+	name = 'BadRequestError' as const;
+	statusCode = HttpResponse.BadRequest.code;
+	httpName = HttpResponse.BadRequest.name;
+	httpDescription = HttpResponse.BadRequest.description;
+}
+
 export class AuthorizationError extends HttpError {
 	name = 'AuthorizationError' as const;
 	statusCode = HttpResponse.Forbidden.code;
