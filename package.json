@@ -23,7 +23,7 @@
     "@nomad-solutions/dev-env": "github:Nomad-Solutions/dev-env#v3.0.0-7"
   },
   "peerDependencies": {
-    "elysia": "^1.1.26"
+    "elysia": "^1.1.23"
   },
   "trustedDependencies": [
     "@nomad-solutions/dev-env",
