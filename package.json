@@ -20,7 +20,7 @@
     "@nomad-solutions/ts-utils": "github:Nomad-Solutions/ts-utils#v1.1.0"
   },
   "devDependencies": {
-    "@nomad-solutions/dev-env": "github:Nomad-Solutions/dev-env#v3.0.0-7"
+    "@nomad-solutions/dev-env": "github:Nomad-Solutions/dev-env#v3.0.0-11"
   },
   "peerDependencies": {
     "elysia": "^1.1.23"
