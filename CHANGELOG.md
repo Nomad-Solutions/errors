@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.2.0](https://github.com/Nomad-Solutions/errors/compare/v2.1.1...v2.2.0) (2025-02-17)
+
+
+### Features
+
+* return and log elysia validation errors correctly ([9e73897](https://github.com/Nomad-Solutions/errors/commit/9e7389763e7f96c72a9ac1ee83a27ce8e07a114a))
+
 ## [2.1.1](https://github.com/Nomad-Solutions/errors/compare/v2.1.0...v2.1.1) (2025-01-02)
 
 
