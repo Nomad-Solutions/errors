@@ -1,4 +1,4 @@
-import { isHttpError } from './assertions';
+import { isHttpError, isElysiaValidationError } from './assertions';
 import { HttpResponse } from './http-responses';
 import { formatErrorMessage, logTraceableError } from './utils';
 import type { Context } from 'elysia';
@@ -9,6 +9,12 @@ export function onError({ error, set }: {
 	set: Context['set']
 }) {
 	logTraceableError(error);
+
+	if (isElysiaValidationError(error)) {
+		set.status = error.status;
+
+		return error.message;
+	}
 
 	if (isHttpError(error)) {
 		set.status = error.statusCode;

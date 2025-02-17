@@ -2,11 +2,13 @@ import { consola, createConsola } from 'consola';
 import { colorize } from 'consola/utils';
 import type { HttpError } from './errors';
 import {
+	isElysiaValidationError,
 	isError,
 	isErrorOfType,
-	isHttpError
+	isHttpError,
 } from './assertions';
 import type { NonEmptyArray, ArrayElement } from '@nomad-solutions/ts-utils';
+import type { ValidationError } from 'elysia';
 
 const consolaNoDate = createConsola({
 	level: 0,
@@ -62,6 +64,8 @@ export function logTraceableError(error: unknown, withDate = true) {
 function logError(error: unknown, withDate = true) {
 	if (isHttpError(error)) {
 		logHttpError(error, withDate);
+	} else if (isElysiaValidationError(error)) {
+		logElysiaValidationError(error, withDate);
 	} else if (isError(error)) {
 		logBuiltinError(error, withDate);
 	} else {
@@ -75,12 +79,22 @@ function logError(error: unknown, withDate = true) {
 
 function logHttpError(error: HttpError, withDate = true) {
 	if (withDate) {
-		consola.error(error.name, colorize('bold', error.statusCode) + ':', error );
+		consola.error(error.name, colorize('bold', error.statusCode) + ':', error);
 
 		return;
 	}
 
-	consolaNoDate.error(error.name, colorize('bold', error.statusCode) + ':', error );
+	consolaNoDate.error(error.name, colorize('bold', error.statusCode) + ':', error);
+}
+
+function logElysiaValidationError(error: ValidationError, withDate = true) {
+	if (withDate) {
+		consola.error('Elysia ValidationError', colorize('bold', error.status) + ':', error);
+
+		return;
+	}
+
+	consolaNoDate.error('Elysia ValidationError', colorize('bold', error.status) + ':', error);
 }
 
 function logBuiltinError(error: Error, withDate = true) {
